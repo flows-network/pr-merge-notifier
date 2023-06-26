@@ -7,69 +7,63 @@
   <a href="https://twitter.com/flows_network">
     <img src="https://img.shields.io/badge/Twitter-1DA1F2?logo=twitter&amp;logoColor=white" alt="flows.network Twitter">
   </a>
-   <a href="https://flows.network/flow/new">
+   <a href="https://flows.network/flow/createByTemplate/send-thank-you-email-to-contributor">
     <img src="https://img.shields.io/website?up_message=deploy&url=https%3A%2F%2Fflows.network%2Fflow%2Fnew" alt="Create a flow">
   </a>
 </p>
 
 
-[Deploy this function on flows.network](#deploy-pr-merge-notifier-on-your-github-repo), and you will automate the work to get reach out to the contributors. When the Pull Requests is merged by miantianers, send a thank you email to the contributors. 
+[Deploy this function on flows.network](#deploy-pr-merge-notifier-on-your-github-repo), and you will automate the work to get reach out to the contributors. When the Pull Request is merged by maintainers, send a thank-you email to the contributors automatically. 
 
-> This function works when the contributor has a plublic email in his/her profile page. If the contributor sets email address private, then we can't send him an email.
+> This function works when the contributor has a public email on his/her profile page. If the contributor sets his/her email address private, then we can't send him an email.
 
 ![image](https://user-images.githubusercontent.com/45785633/228182641-835276f6-7aa9-48c0-a16b-3ef9cf452d30.png)
 
-## Prerequisite 
-
-You will need a [Sendgrid API key](https://app.sendgrid.com/settings/api_keys). If you do not already have one, [sign up here](https://app.sendgrid.com/settings/api_keys).
-
-
 ## Deploy PR Merge Notifier on your GitHub repo
 
-To install this PR merge notifier app, we use [flows.network](https://flows.network/), a serverless platform that lets you make a workflow app in three simple steps.
+### 0 Prerequisite 
 
-### Fork this repo and make simple code edit
+1. You will need a [Sendgrid API key](https://app.sendgrid.com/settings/api_keys). If you do not already have one, [sign up here](https://app.sendgrid.com/settings/api_keys).
+2. You will also need to sign into [flows.network](https://flows.network/) from your GitHub account. It is free.
 
-Fork [this repo](https://github.com/flows-network/pr-merge-notifier) and open the source code. Replace the parameters in the red boxes below with your personal GitHub account, the GitHub Repo owner and repo name where you want to install the app and then your sendgrid account respectively.
+### 1 Create from a template
 
-![image](https://user-images.githubusercontent.com/45785633/228185236-b09607c6-6d40-440b-9677-59f2bf96eb97.png)
+[**Just click here**](https://flows.network/flow/createByTemplate/send-thank-you-email-to-contributor)
+
+Click on the **Create and Build** button.
 
 
-### Deploy the code on flows.network
+### 2 Configure the GitHub integration
 
-1. Sign up for an account for deploying flows on [flows.network](https://flows.network/). It's free.
-2. Click on the "Create a Flow" button to start deploying this app.
-3. Authorize the [flows.network](https://flows.network/) to access the `pr-merge-notifier` repo you just forked. 
+Next, you will tell the bot which GitHub repo it needs to monitor for upcoming PRs.
 
-<img width="915" alt="image" src="https://user-images.githubusercontent.com/45785633/227570338-eadbd41e-8d57-4d47-bb69-e3e805444bec.png">
+* `github_owner`: GitHub org for the repo *you want to deploy the 🤖 on*.
+* `github_repo` : GitHub repo *you want to deploy the 🤖 on*.
 
-4. Click the Deploy button to deploy your function.
+> Let's see an example. You would like to deploy the bot on `WasmEdge/wasmedge_hyper_demo` repo. Here `github_owner = WasmEdge` and `github_repo = wasmedge_hyper_demo`.
 
-### Configure SaaS integrations
+Click on the **Connect** or **+ Add new authentication** button to give the function access to the GitHub repo to deploy the 🤖. You'll be redirected to a new page where you must grant [flows.network](https://flows.network/) permission to the repo.
 
-Next, flows.network directs you to configure the SaaS integrations required by your flow.
+[<img width="450" alt="image" src="https://github.com/flows-network/github-pr-summary/assets/45785633/6cefff19-9eeb-4533-a20b-03c6a9c89473">](https://github.com/flows-network/github-pr-summary/assets/45785633/6cefff19-9eeb-4533-a20b-03c6a9c89473)
 
-<img width="927" alt="image" src="https://user-images.githubusercontent.com/45785633/227570411-aaa84463-7f2e-47a9-9e69-15ed585a478a.png">
+Close the tab and go back to the flow.network page once you are done. Click on **Deploy**.
 
-Here we need to configue 2 SaaS integrations.
+### 3 Configure the SendGrid integration
 
-1. Click the "Connect/+ Add new authentication" button to authenticate your **GitHub account**. You'll be redirected to a new page to grant [flows.network](https://flows.network/) permission to install the `flows-network-integration` bot on the repo that you changed in the code above.
-2. Click the "Connect/+ Add new authentication" button to authenticate your **Sendgrid account**. You'll be redirected to a new page where you could copy and paste your SendGrid API key and then name the key. **Note that the name you enter here should be the same as the name in the code above.**
+Next, you will need to set up the email. Here we use SendGrid to do this.
+
+* `sendgrid_sender_address`: the sender's email, which should be the same as your SendGrid setting.
+
+<img width="500" alt="image" src="https://github.com/flows-network/pr-merge-notifier/assets/45785633/fc52db79-f735-42dd-8c27-9e319b752dbd">
+
+Click on the **Connect** or **+ Add new authentication** button to give the function access to use your email address. You'll be redirected to a new page where you must grant [flows.network](https://flows.network/) permission to your SendGrid account.
+
   
-<img width="765" alt="image" src="https://user-images.githubusercontent.com/45785633/227570457-94ad1092-e483-436c-be4e-624d1faff18a.png">
+<img width="500" alt="image" src="https://user-images.githubusercontent.com/45785633/227570457-94ad1092-e483-436c-be4e-624d1faff18a.png">
 
+Close the tab and go back to the flow.network page once you are done. Click on **Deploy**.
 
-After that, click the Check button to see your flow details. As soon as the flow function's status turns `ready` and the flow's status becomes `running`, the PR merge notifier goes live. Get connected with your contributor right away as contributors increase!
+## Wait for the magic
 
+As soon as the flow function's status turns `ready` and the flow's status becomes `running`, the PR merge notifier goes live. Get connected with your contributor right away as contributors increase!
 
-> [flows.network](https://flows.network/) is still in its early stages. We would love to hear your feedback!
-
-
-## Others
-
-
-To build locally, make sure you have installed Rust and added `wasm32-wasi` target.
-
-```
-cargo build target wasm32-wasi --release
-```
